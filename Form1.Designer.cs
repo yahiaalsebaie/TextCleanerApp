@@ -39,6 +39,9 @@
             this.txtRemoveLines = new System.Windows.Forms.TextBox();
             this.txtMainText = new System.Windows.Forms.TextBox();
             this.txtResultText = new System.Windows.Forms.TextBox();
+            this.txtNumberOfMainlines = new System.Windows.Forms.Label();
+            this.txtNumberOfRemoveLines = new System.Windows.Forms.Label();
+            this.txtNumberOfResultLines = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnPaste
@@ -67,7 +70,7 @@
             // btnCopy
             // 
             this.btnCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F);
-            this.btnCopy.Location = new System.Drawing.Point(920, 445);
+            this.btnCopy.Location = new System.Drawing.Point(901, 445);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(222, 63);
             this.btnCopy.TabIndex = 30;
@@ -144,6 +147,36 @@
             this.txtResultText.Size = new System.Drawing.Size(380, 350);
             this.txtResultText.TabIndex = 21;
             // 
+            // txtNumberOfMainlines
+            // 
+            this.txtNumberOfMainlines.AutoSize = true;
+            this.txtNumberOfMainlines.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F);
+            this.txtNumberOfMainlines.Location = new System.Drawing.Point(206, 511);
+            this.txtNumberOfMainlines.Name = "txtNumberOfMainlines";
+            this.txtNumberOfMainlines.Size = new System.Drawing.Size(32, 36);
+            this.txtNumberOfMainlines.TabIndex = 26;
+            this.txtNumberOfMainlines.Text = "0";
+            // 
+            // txtNumberOfRemoveLines
+            // 
+            this.txtNumberOfRemoveLines.AutoSize = true;
+            this.txtNumberOfRemoveLines.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F);
+            this.txtNumberOfRemoveLines.Location = new System.Drawing.Point(601, 511);
+            this.txtNumberOfRemoveLines.Name = "txtNumberOfRemoveLines";
+            this.txtNumberOfRemoveLines.Size = new System.Drawing.Size(32, 36);
+            this.txtNumberOfRemoveLines.TabIndex = 26;
+            this.txtNumberOfRemoveLines.Text = "0";
+            // 
+            // txtNumberOfResultLines
+            // 
+            this.txtNumberOfResultLines.AutoSize = true;
+            this.txtNumberOfResultLines.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F);
+            this.txtNumberOfResultLines.Location = new System.Drawing.Point(996, 511);
+            this.txtNumberOfResultLines.Name = "txtNumberOfResultLines";
+            this.txtNumberOfResultLines.Size = new System.Drawing.Size(32, 36);
+            this.txtNumberOfResultLines.TabIndex = 26;
+            this.txtNumberOfResultLines.Text = "0";
+            // 
             // RemoveLines
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -155,6 +188,9 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtNumberOfResultLines);
+            this.Controls.Add(this.txtNumberOfRemoveLines);
+            this.Controls.Add(this.txtNumberOfMainlines);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtResultText);
             this.Controls.Add(this.txtRemoveLines);
@@ -163,6 +199,7 @@
             this.Name = "RemoveLines";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Remove Lines";
+            this.Load += new System.EventHandler(this.RemoveLines_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,6 +218,9 @@
         private System.Windows.Forms.TextBox txtRemoveLines;
         private System.Windows.Forms.TextBox txtMainText;
         private System.Windows.Forms.TextBox txtResultText;
+        private System.Windows.Forms.Label txtNumberOfMainlines;
+        private System.Windows.Forms.Label txtNumberOfRemoveLines;
+        private System.Windows.Forms.Label txtNumberOfResultLines;
     }
 }
 

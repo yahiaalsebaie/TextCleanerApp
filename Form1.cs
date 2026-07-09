@@ -14,76 +14,47 @@ namespace TextCleanerApp
 
         private void btnPaste_Click(object sender, EventArgs e)
         {
-            PasteToMain();
+            txtMainText.Text = GetClipboardText();
+            UpdateLineCount();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearMainText();
+            txtMainText.Clear();
+            UpdateLineCount();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            ProcessRemoveLines();
+            var mainLines = ConvertToLines(txtMainText.Text);
+            var removeLines = ConvertToLines(txtRemoveLines.Text);
+            var resultLines = FilterLines(mainLines, removeLines);
+            txtResultText.Text = ConvertToText(resultLines);
+            UpdateLineCount();
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            CopyResult();
+            if (!string.IsNullOrWhiteSpace(txtResultText.Text))
+                Clipboard.SetText(txtResultText.Text);
         }
 
-        // =============================
-        // Core Operations (Orchestrators)
-
-        private void ProcessRemoveLines()
+        private void txtMainText_TextChanged(object sender, EventArgs e)
         {
-            string mainText = GetMainText();
-            string removeText = GetRemoveText();
-
-            List<string> mainLines = ConvertToLines(mainText);
-            List<string> removeLines = ConvertToLines(removeText);
-
-            List<string> resultLines = FilterLines(mainLines, removeLines);
-
-            string result = ConvertToText(resultLines);
-
-            ShowResult(result);
+            UpdateLineCount();
         }
 
-        private void PasteToMain()
+        private void txtRemoveLines_TextChanged(object sender, EventArgs e)
         {
-            txtMainText.Text = GetClipboardText();
+            UpdateLineCount();
         }
 
-        private void ClearMainText()
+        private void txtResultText_TextChanged(object sender, EventArgs e)
         {
-            txtMainText.Clear();
+            UpdateLineCount();
         }
 
-        private void CopyResult()
-        {
-            SetClipboardText(txtResultText.Text);
-        }
 
-        // =============================
-        // Input / Output
-
-        private string GetMainText()
-        {
-            return txtMainText.Text;
-        }
-
-        private string GetRemoveText()
-        {
-            return txtRemoveLines.Text;
-        }
-
-        private void ShowResult(string result)
-        {
-            txtResultText.Text = result;
-        }
-
-        // =============================
         // Clipboard
 
         private string GetClipboardText()
@@ -91,27 +62,17 @@ namespace TextCleanerApp
             return Clipboard.ContainsText() ? Clipboard.GetText() : string.Empty;
         }
 
-        private void SetClipboardText(string text)
-        {
-            if (!string.IsNullOrWhiteSpace(text))
-                Clipboard.SetText(text);
-        }
 
-        // =============================
         // Text Processing
 
         private List<string> ConvertToLines(string text)
         {
-            return text
-                .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None)
-                .ToList();
+            return text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
         }
 
         private List<string> FilterLines(List<string> mainLines, List<string> removeLines)
         {
-            HashSet<string> removeSet = new HashSet<string>(
-                removeLines.Select(l => Normalize(l))
-            );
+            var removeSet = new HashSet<string>(removeLines.Select(Normalize));
 
             return mainLines
                 .Where(line => !removeSet.Contains(Normalize(line)))
@@ -126,6 +87,33 @@ namespace TextCleanerApp
         private string ConvertToText(List<string> lines)
         {
             return string.Join(Environment.NewLine, lines);
+        }
+
+
+        // Line Counter
+
+        private void UpdateLineCount()
+        {
+            var mainLineCount = GetLineCount(txtMainText.Text);
+            var removeLineCount = GetLineCount(txtRemoveLines.Text);
+            var resultLineCount = GetLineCount(txtResultText.Text);
+
+            txtNumberOfMainlines.Text = mainLineCount.ToString();
+            txtNumberOfRemoveLines.Text = removeLineCount.ToString();
+            txtNumberOfResultLines.Text = resultLineCount.ToString();
+        }
+
+        private int GetLineCount(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            return text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Length;
+        }
+
+        private void RemoveLines_Load(object sender, EventArgs e)
+        {
+            UpdateLineCount();
         }
     }
 }
