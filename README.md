@@ -45,8 +45,6 @@ Introduction
 The HTML <sub> and <sup> tags are used to display text.
 ```
 
-![[Pasted image 20260709053522.png]]
-
 ### 2. Filtering Data Lists (Emails & Phone Numbers)
 Perfect for marketers or database administrators looking to scrub a massive lead list against an internal "Do Not Contact" (DNC) list or employee directory.
 * **Main Text:** Bulk client list containing 10,000 entries.
