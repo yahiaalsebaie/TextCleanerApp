@@ -3,7 +3,7 @@
 
 A lightweight, efficient Windows Forms application designed to clean, filter, and sanitize bulk text data. By matching text against a user-defined blacklist, the tool eliminates repetitive signatures, copyrights, watermarks, or unwanted entries instantly.
 
-<img width="1535" height="722" alt="Screenshot 2026-07-09 052711" src="https://github.com/user-attachments/assets/683dcd97-aae8-4ddf-8537-bed933458c5c" />
+<img width="1536" height="732" alt="Screenshot 2026-07-09 054407" src="https://github.com/user-attachments/assets/6af3bcfb-01c8-4c04-90e4-c700985842a3" />
 
 ---
 
